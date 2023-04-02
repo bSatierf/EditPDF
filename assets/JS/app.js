@@ -61,6 +61,44 @@ const erroNumPaginas = (totalPagPdf, numPagDel) => {
 }
 
 
+const convertJPEGtoPDF = async () => {
+  const pdfDoc = await PDFDocument.create();
+  const img = document.getElementById('file1').files[0];
+  const nomeImg = img.name;
+  const imageExt = nomeImg.split('.').pop();
+  if (/(jpe?g)$/i.test(imageExt)) {
+    const jpegBytes = await readFileAsync(img);
+    const jpeg1 = await pdfDoc.embedJpg(jpegBytes);
+    const redimensionaJpeg = jpeg1.scale(0.7);
+    const pagina = pdfDoc.addPage();
+    pagina.drawImage(jpeg1, {
+      x: pagina.getWidth() / 2 - redimensionaJpeg.width / 2,
+      y: pagina.getHeight() / 2 - redimensionaJpeg.height / 2,
+      width: redimensionaJpeg.width,
+      height: redimensionaJpeg.height,
+    });
+  } else if (/(png)$/i.test(imageExt)) {
+    const pngBytes = await readFileAsync(img);
+    const png1 = await pdfDoc.embedPng(pngBytes);
+    const redimensionaPng = png1.scale(0.4);
+    const paginaPng = pdfDoc.addPage();
+    paginaPng.drawImage(png1, {
+      x: paginaPng.getWidth() / 2 - redimensionaPng.width / 2,
+      y: paginaPng.getHeight() / 2 - redimensionaPng.height / 2,
+      width: redimensionaPng.width,
+      height: redimensionaPng.height,
+    });
+  } else {
+    console.log(imageExt)
+    alert('O arquivo não é uma imagem');
+  }
+
+  const pdfOk = await pdfDoc.save();
+
+  download(pdfOk, `pdf converted`, 'application/pdf');
+}
+
+
 function download(file, filename, type) {
   const link = document.getElementById('link');
   link.download = filename;
@@ -73,6 +111,7 @@ function download(file, filename, type) {
 const button = document.querySelector('.button');
 
 button.addEventListener('click', () => {
-  removerPagina(inputRemover.value);
+  // removerPagina(inputRemover.value);
+  convertJPEGtoPDF();
 });
 
