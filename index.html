@@ -1,30 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<html>
 <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.js"></script>
-  
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="./assets/CSS/style.css">
+  <title>PDFVault</title>
 </head>
+
 <body>
-  <input type="file" id="file1"> <br>
-  <input type="text" id="numPage"> <br>
-  <input type="file" id="file2"> <br>
-  <input type="file" id="file3"> <br>
-  <button class="button">Merge</button> <br>
-  <a id="link">Download</a>
+  <header class="cabecalho">
+    <div class="cabecalho__logo">
+      <h2>PDFVault</h2>
 
-
-
-
-  <script crossorigin src="./assets/JS/app.js"></script>
+    </div>
+    <nav class="cabecalho__navegacao">
+      <ul class="navegacao__lista">
+        <li class="lista--juntar-pdf">Juntar PDF</li>
+        <li class="lista--remover-pagina">Remover Página</li>
+        <li class="lista--jpg-pdf">JPG para PDF</li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="hero--area">
+        <div class="hero__texto">
+          <h1>PDFVault</h1>
+          <p>Uma ferramenta para manipular arquivos PDF</p>
+        </div>
+      </div>
+    </section>
+    <section class="container__funcoes">
+      <div class="funcoes--juntar-pdf">
+        <span class="iconify" data-icon="bi:filetype-pdf" data-width="100"></span>
+        <p>Mesclar PDF</p>
+      </div>
+      <div class="funcoes--dividir-pdf">
+        <span class="iconify" data-icon="bi:filetype-pdf" data-width="100"></span>
+        <p>Remover Página</p>
+      </div>
+      <div class="funcoes--jpg-pdf">
+        <span class="iconify" data-icon="bi:filetype-pdf" data-width="100"></span>
+        <p>JPG para PDF</p>
+      </div>
+    </section>
+    <section class="container__descricao">
+      <div class="descricao--site"></div>
+    </section>
+  </main>
+  <footer class="rodape">
+    <div class="rodape__descricao">
+      <p>Desenvolvido por <a href="https://github.com/bSatierf">bSatierf</a> - 2023</p>
+    </div>
+  </footer>
 </body>
+<script src="./assets/JS/app.js"></script>
 
 </html>
-
-
-
-
-
-
-
-
-
