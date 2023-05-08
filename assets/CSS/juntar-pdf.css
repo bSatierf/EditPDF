@@ -1,0 +1,124 @@
+.container {
+  width: 100vw;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > section {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 3rem;
+}
+
+.anexar-container {
+  width: 100%;
+  height: 70%;
+  padding: 2rem;
+  
+}
+
+.arquivos-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.anexar-pdf1,
+.anexar-pdf2,
+.area-input {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.anexar-pdf1,
+.anexar-pdf2 {
+  width: 100%;
+  height: 100%;
+}
+
+.label-pdf1,
+.label-pdf2 {
+  border-radius: 15px;
+  background: #f5f5f5;
+  box-shadow:  0px 11px 18px 3px #d0d0d0,
+                0px 11px 7px 0px #ffffff;
+  cursor: pointer;
+  text-align: center;
+  padding: 1.2rem 1rem;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#numPage {
+  border-radius: 15px;
+  width: 50%;
+  height: 50%;
+  text-align: center;
+  padding: 0 2rem;
+  font-size: 1.2rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.label-numPage {
+  padding: .5rem;
+  color: #999999;
+  text-align: center;
+}
+
+.area-button {
+  padding: 2rem 0 0 0;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+
+.juntar {
+  width: 50%;
+  padding: .5rem .5rem;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid var(--cor-marca);
+  color: var(--cor-marca);
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.18em;
+  cursor: pointer;
+  box-shadow: 0px 7px 9px 0px rgb(0 0 0 / 20%);
+  transition: ease-in-out 300ms;
+  text-align: center;
+}
+
+.juntar:hover {
+  box-shadow: 0 0 0 4px var(--cor-de-fundo), 0 0 0 5px var(--cor-marca);
+  transition: ease-in-out 400ms;
+}
+
+.juntar:active {
+  box-shadow: 0 8px 9px 4px rgb(0 0 0 / 20%);
+  transform: scale(1.05);
+  transition: ease-in-out 300ms;
+}
