@@ -1,22 +1,24 @@
-
 function readFileAsync(file) {
   return new Promise((resolve, reject) => {
-    let reader = new FileReader(); 
+    let reader = new FileReader();
     reader.onload = () => {
       resolve(reader.result);
-    }; 
-    reader.onerror = reject; 
+    };
+    reader.onerror = reject;
     reader.readAsArrayBuffer(file);
   })
 }
 
 let PDFDocument = PDFLib.PDFDocument;
 
-const insertPDF = async () => {
-  const pdfA = document.getElementById('file1').files[0];
-  const pdfB = document.getElementById('file2').files[0];
-  const pdfAName = pdfA.name;
-  console.log(pdfAName);
+const juntarPDF = async (file1, file2, indexPage) => {
+  const pdfA = file1.files[0];
+  const pdfB = file2.files[0];
+  // const pdfAName = pdfA.name;
+  // console.log(pdfAName);
+  // atualmente, o valor inserido no input, indica onde a página do segundo pdf será inserida no primeiro pdf. Por exemplo, se o usuário inserir o valor 2, a página do segundo pdf será inserida na segunda página do primeiro pdf.
+  const numPage = parseInt(indexPage.value - 1);
+  console.log(numPage)
 
   let bytesA = await readFileAsync(pdfA);
   let bytesB = await readFileAsync(pdfB);
@@ -25,16 +27,15 @@ const insertPDF = async () => {
 
   const numPages = pdf2.getPageCount();
   for (let i = 0; i < numPages; i++) {
-    const [existingPage] = await pdf1.copyPages (pdf2, [i]);
+    const [existingPage] = await pdf1.copyPages(pdf2, [i]);
     console.log(pdf2.getPageIndices())
 
-    pdf1.insertPage(2 + i, existingPage);
+    pdf1.insertPage(numPage + i, existingPage);
   }
 
   const pdfOk = await pdf1.save();
 
-  download(pdfOk, `pdf merged`, 'application/pdf')
-
+  download(pdfOk, `pdf merged`, 'application/pdf');
 }
 
 const inputRemover = document.querySelector('#numPage');
@@ -98,20 +99,68 @@ const convertJPEGtoPDF = async () => {
   download(pdfOk, `pdf converted`, 'application/pdf');
 }
 
+// const PDFDivido = async (index, pdf1) => {
+//   //pegar o pdf1
+//   //pegar index onde o pdf1 será dividido
+//   //criar um novo pdf
+//   //pegar o index +1 do pdf1 e fazer um loop até o final do pdf1 e inserir no novo pdf
+//   //fazer download do novo pdf
+
+
+// }
+
+const dividirPDF = async () => {
+  // atualmente o pdf é dividido deixando a página selecionada no pdf original, por exemplo
+  // se o pdf tem 10 paginas e o usuário seleciona a página 5, o pdf original vai ter as páginas 1,2,3,4, 5
+  // e o novo pdf vai ter as páginas 6,7,8,9,10.
+
+  const pdfA = document.getElementById('file1').files[0];
+  let bytesA = await readFileAsync(pdfA);
+  const pdf1 = await PDFDocument.load(bytesA);
+  const numPages = pdf1.getPageCount();
+  const index = parseInt(inputRemover.value);
+  const pdfDividido = await PDFDocument.create();
+  for (let i = index; i < numPages; i++) {
+    const [existingPage] = await pdfDividido.copyPages(pdf1, [i]);
+    pdfDividido.insertPage(i - index, existingPage);
+    console.log(i - index)
+    console.log(index)
+    console.log('pdf1 ' + pdf1.getPageCount())
+    for (let j = i; j < numPages; j++) {
+      if (pdf1.getPageCount() != index) {
+
+        console.log('pdf11 ' + pdf1.getPageCount())
+        console.log('pdf1 ' + pdf1.getPageIndices());
+        pdf1.removePage(i);
+      }
+    }
+  }
+
+  //laço for funcionando, tanto para salvar o pdf dividido quanto para remover as páginas do pdf original
+
+  const pdfOk = await pdfDividido.save();
+  
+  download(pdfOk, `pdf divided`, 'application/pdf');
+  
+
+}
 
 function download(file, filename, type) {
-  const link = document.getElementById('link');
+  const link = document.getElementById('merge-pdf')
+  console.log(link)
   link.download = filename;
   let binaryData = [];
   binaryData.push(file);
-  link.href = URL.createObjectURL(new Blob(binaryData, {type: type}))
+  link.href = URL.createObjectURL(new Blob(binaryData, {
+    type: type
+  }))
+  console.log('foi ?')
 }
 
-
-const button = document.querySelector('.button');
-
-button.addEventListener('click', () => {
-  // removerPagina(inputRemover.value);
-  convertJPEGtoPDF();
-});
-
+export const app = {
+  readFileAsync,
+  download,
+  juntarPDF,
+  removerPagina,
+  convertJPEGtoPDF,
+};
