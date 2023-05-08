@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.js"></script>
+  <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="stylesheet" href="../assets/CSS/style.css">
+  <link rel="stylesheet" href="../assets/CSS/juntar-pdf.css">
+  <title>Juntar PDF - PDFVault</title>
+</head>
+<body>
+  <header class="cabecalho">
+    <div class="cabecalho__logo">
+      <h2>PDFVault</h2>
+
+    </div>
+    <nav class="cabecalho__navegacao">
+      <ul class="navegacao__lista">
+        <li class="lista--juntar-pdf">Juntar PDF</li>
+        <li class="lista--remover-pagina">Remover Página</li>
+        <li class="lista--jpg-pdf">JPG para PDF</li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    <section>
+      <div class="anexar-container">
+
+        <div class="arquivos-container">
+  
+          <div class="anexar-pdf1">
+            <input type="file" id="pdf1">
+            <label for="pdf1" class="label-pdf1">Clique aqui para inserir o primeiro arquivo!</label>
+          </div>
+          <div class="anexar-pdf2">
+            <input type="file" id="pdf2">
+            <label for="pdf2" class="label-pdf2">Clique aqui para inserir o segundo arquivo!</label>
+          </div>
+          <div class="area-input">
+            <input type="number" id="numPage" placeholder="Ex: 5">
+            <label for="numPage" class="label-numPage">Insira o número da página onde o segundo arquivo será anexado!</label>
+          </div>
+          <div class="area-button">
+            <a class="juntar" id="merge-pdf">Juntar</a>
+            <!-- <button  id="donwload-button">Donwload</button> -->
+          </div>
+  
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="rodape">
+    <div class="rodape__descricao">
+      <p>Desenvolvido por <a href="https://github.com/bSatierf">bSatierf</a> - 2023</p>
+    </div>
+  </footer>
+</body>
+<script crossorigin type="module" src="../assets/JS/juntar-pdf.js"></script>
+<script crossorigin type="module" src="../assets/JS/app.js"></script>
+</html>
